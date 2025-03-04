@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "test": "echo Test npm script && exit 1"
+    "test": "echo Test npm script && exit 1",
+    "dev": "webpack serve --config webpack.dev.js",
+    "build": "webpack serve --config webpack.prod.js"
   },
   "keywords": [],
   "author": "your_name <your_email@mail.com>",
