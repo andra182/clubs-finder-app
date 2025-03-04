@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Club Finder App</title>
+
+    <!-- Favicons -->
+    <link rel="icon" href="favicon.png" sizes="48x48" />
+  </head>
+  <body>
+    <header>
+      <app-bar></app-bar>
+    </header>
+
+    <main>
+      <div class="container">
+        <section id="club" class="club">
+          <div class="title-section">
+            <h2>Sport Club List</h2>
+          </div>
+
+          <div id="searchBarContainer" class="search-bar-container">
+            <search-bar></search-bar>
+          </div>
+
+          <div id="clubListContainer" class="club-list-container">
+            <div class="placeholder query-waiting">Waiting for search keyword</div>
+            <div class="placeholder search-loading">Loading</div>
+
+            <club-list></club-list>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <footer-bar></footer-bar>
+    </footer>
+  </body>
+</html>
