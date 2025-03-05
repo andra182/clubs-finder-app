@@ -1,22 +1,31 @@
-import Utils from '../utils.js';
-import Clubs from '../data/local/clubs.js';
+import Utils from "../utils.js";
+import SportsApi from "../data/remote/sports-api.js";
 
 const home = () => {
-  const searchFormElement = document.querySelector('search-bar');
+  const searchFormElement = document.querySelector("search-bar");
 
-  const clubListContainerElement = document.querySelector('#clubListContainer');
+  const clubListContainerElement = document.querySelector("#clubListContainer");
   const clubQueryWaitingElement =
-    clubListContainerElement.querySelector('.query-waiting');
-  const clubLoadingElement = clubListContainerElement.querySelector('.search-loading');
-  const clubListElement = clubListContainerElement.querySelector('club-list');
+    clubListContainerElement.querySelector(".query-waiting");
+  const clubSearchErrorElement =
+    clubListContainerElement.querySelector("club-search-error");
+  const clubLoadingElement =
+    clubListContainerElement.querySelector(".search-loading");
+  const clubListElement = clubListContainerElement.querySelector("club-list");
 
   const showSportClub = (query) => {
     showLoading();
 
-    const result = Clubs.searchClub(query);
-    displayResult(result);
+    SportsApi.searchClub(query)
+      .then((result) => {
+        displayResult(result);
 
-    showClubList();
+        showClubList();
+      })
+      .catch((error) => {
+        clubSearchErrorElement.textContent = error.message;
+        showSearchError();
+      });
   };
 
   const onSearchHandler = (event) => {
@@ -28,7 +37,7 @@ const home = () => {
 
   const displayResult = (clubs) => {
     const clubItemElements = clubs.map((club) => {
-      const clubItemElement = document.createElement('club-item');
+      const clubItemElement = document.createElement("club-item");
       clubItemElement.club = club;
 
       return clubItemElement;
@@ -59,7 +68,7 @@ const home = () => {
     Utils.showElement(clubQueryWaitingElement);
   };
 
-  searchFormElement.addEventListener('search', onSearchHandler);
+  searchFormElement.addEventListener("search", onSearchHandler);
   showQueryWaiting();
 };
 
